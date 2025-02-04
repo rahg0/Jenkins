@@ -11,6 +11,7 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'ORCA_SECURITY_API_TOKEN', variable: 'TOKEN')]) {
           sh '''
+            curl -sfL 'https://raw.githubusercontent.com/orcasecurity/orca-cli/main/install.sh' | bash -s
             # Run Orca-CLI with the specified project and image
             orca-cli -p ${PROJECT_KEY} --api-token "${TOKEN}" image scan ${IMAGE_NAME}
           '''
