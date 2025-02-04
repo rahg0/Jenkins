@@ -2,10 +2,14 @@
 
 pipeline {
   agent {
-    docker { image 'docker:dind' }
+    docker { 
+      image 'docker:dind' 
+      args '--privileged'  
+    }
   }
   
   environment {
+    DOCKER_HOST = 'tcp://localhost:2375'
     IMAGE_NAME = 'raghuimage:latest'
     PROJECT_KEY = 'allscan' // Set the desired project for CLI scanning
   }
