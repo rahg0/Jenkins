@@ -1,11 +1,7 @@
 #!/usr/bin/env groovy
 
 pipeline {
-  agent {
-    dockerfile {
-      filename 'Dockerfile.orca' // Use the Dockerfile for Orca
-    }
-  }
+  agent any
   environment {
     IMAGE_NAME = 'vuln-app:1.0'
     PROJECT_KEY = 'allscan' // Set the desired project for CLI scanning
