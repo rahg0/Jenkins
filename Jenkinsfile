@@ -1,15 +1,16 @@
-#!/usr/bin/env groovy
-
 pipeline {
   agent {
     docker { 
       image 'docker:dind' 
-      args '--privileged'  
+      args '''
+                --privileged 
+                -v /var/run/docker.sock:/var/run/docker.sock
+                -e DOCKER_TLS_CERTDIR=""
+            '''
     }
   }
   
   environment {
-    DOCKER_HOST = 'tcp://localhost:2375'
     IMAGE_NAME = 'raghuimage:latest'
     PROJECT_KEY = 'allscan' // Set the desired project for CLI scanning
   }
